@@ -74,7 +74,7 @@ const PORT = 8080;
 
 
 
-const customerRouter = require("./routes/Customer.js");
+const customerRouter = require("./routes/Customers.js");
 
 app.use("/customer",customerRouter);
 
