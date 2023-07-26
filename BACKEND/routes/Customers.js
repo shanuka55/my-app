@@ -39,4 +39,45 @@ router.route("/").get((req,res)=>{
 })
 
 
+//uodate
+router.route("/update/:id").put(async(res,req)=>{
+
+    let userId = req.params.id;
+    const {id,name,address,gender} = req.body; //destruchure
+    
+    const updateCustomer = {
+        id,
+        name,
+        address,
+        gender
+    }
+    const update = await Customer.findByIdAndUpdate(userId,updateCustomer)
+    .then(()=>{
+
+        res.status(200).send({status: "User Updated",user: update})
+    }).cach((err)=>{
+        console.log(err);
+        res.status(500).send({status: "Error with Updating data",error:err.message});
+    })
+
+
+    router.route("/delete/:id").delete(async (req,res)=>{
+ 
+        let userId = req.params.id;
+
+        await Customer.findByIdAndDelete(userId).then(()=>{
+            res.status(200).send({status : "User deleted" });
+        }).cach((err)=>{
+            console.log(err.message);
+            res.status(500).send({status : "Error with delete user",error : err.message});
+        })
+    })
+
+
+})
+
+
+
+
+
 module.exports = router;
