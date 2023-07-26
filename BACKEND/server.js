@@ -72,10 +72,21 @@ app.use(bodyParser.json());
 const PORT = 8080;
 //mongodb://localhost:27017/webStoreTwo
 
+
+
+const customerRouter = require("./routes/Customer.js");
+
+app.use("/customer",customerRouter);
+
+
+
+
+
 mongoose.connect("mongodb://127.0.0.1:27017/webStoreTwo",{
     }).then(() => {
     console.log("Mongo DB Connetion Successfull");
 })
+
     .catch((err) => {
         console.log("db error"+err.message);
     });
