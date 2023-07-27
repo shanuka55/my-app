@@ -1,22 +1,22 @@
 const router = require("express").Router();//import pakage express.router
-let Customer = require("../models/Customers");
-const customer = require("../models/customer");
+let Customer = require("../models/customer");
+// const customer = require("../models/customer");
 
                     // insert/add data-(post) http method
 router.route("/add").post((req,res) =>{
 
     //font end eke ewana data tika gannawa reqest ekk widihata
-    const id = Number(req.body.id);
+    const id = req.body.id;
     const name = req.body.name;
     const address = req.body.address;
-    const gender = req.body.gender;
+    const contact = Number(req.body.contact);
 
     const newCustomer = new Customer({
 
         id,
         name,
         address,
-        gender
+        contact                  
     })
 
     newCustomer.save().then(()=>{
@@ -43,13 +43,13 @@ router.route("/").get((req,res)=>{
 router.route("/update/:id").put(async(res,req)=>{
 
     let userId = req.params.id;
-    const {id,name,address,gender} = req.body; //destruchure
+    const {id,name,address,contact} = req.body; //destruchure
     
     const updateCustomer = {
         id,
         name,
         address,
-        gender
+        contact
     }
     const update = await Customer.findByIdAndUpdate(userId,updateCustomer)
     .then(()=>{
@@ -66,7 +66,7 @@ router.route("/update/:id").put(async(res,req)=>{
         let userId = req.params.id;
 
         await Customer.findByIdAndDelete(userId).then(()=>{
-            res.status(200).send({status : "User deleted" });
+            res.status(200).send({status : "User deleted" })
         }).cach((err)=>{
             console.log(err.message);
             res.status(500).send({status : "Error with delete user",error : err.message});

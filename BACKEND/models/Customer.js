@@ -26,6 +26,6 @@ const customerSchema = new Schema({
 
 })
                                 //yanna ona database eke table eka
-const customer = mongoose.model("Customer",customerSchema);
+const customer = mongoose.model('Customer',customerSchema);
 
 module.exports = customer;
