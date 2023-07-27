@@ -21,9 +21,13 @@ const PORT = 8080;
 
 
 
-const customersRouter = require('./routes/customers');
+const customersRouter = require('./routes/customers.js');
+const itemsRouter = require('./routes/items.js');
+const orderRouter = require('./routes/orders.js');
 
 app.use("/customer",customersRouter);
+app.use("/item",itemsRouter);
+app.use("/order",orderRouter);
 
 
 
